@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-base.SocialApis",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Miscellaneous", "Development", "Productivity"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://docs.socialapis.io/"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://docs.socialapis.io/"
+			}
+		]
+	}
+}
