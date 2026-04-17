@@ -61,8 +61,11 @@ export const facebookGroupOperations: INodeProperties[] = [
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
-		default: 3,
-		description: 'Max number of results to return. Group posts return 3 items per API call by default.',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		description: 'Max number of results to return',
 		displayOptions: { show: { operation: ['getGroupPosts'] } },
 	},
 	{

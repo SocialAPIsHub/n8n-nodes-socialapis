@@ -9,6 +9,19 @@ export const facebookSearchOperations: INodeProperties[] = [
 		displayOptions: { show: { resource: ['facebookSearch'] } },
 		options: [
 			{
+				name: 'Search Locations',
+				value: 'searchLocations',
+				action: 'Search facebook locations',
+				description: 'Search for locations. Returns location UIDs for filtering other search endpoints.',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/facebook/search/locations',
+						qs: { query: '={{$parameter.query}}' },
+					},
+				},
+			},
+			{
 				name: 'Search Pages',
 				value: 'searchPages',
 				action: 'Search facebook pages',
@@ -39,19 +52,6 @@ export const facebookSearchOperations: INodeProperties[] = [
 							location_uid: '={{$parameter.additionalFields.location_uid}}',
 							end_cursor: '={{$parameter.additionalFields.end_cursor}}',
 						},
-					},
-				},
-			},
-			{
-				name: 'Search Locations',
-				value: 'searchLocations',
-				action: 'Search facebook locations',
-				description: 'Search for locations. Returns location UIDs for filtering other search endpoints.',
-				routing: {
-					request: {
-						method: 'GET',
-						url: '/facebook/search/locations',
-						qs: { query: '={{$parameter.query}}' },
 					},
 				},
 			},
@@ -109,19 +109,24 @@ export const facebookSearchOperations: INodeProperties[] = [
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
-		default: 3,
-		description: 'Max number of results to return. Search pages, people, and posts return 3 items per API call by default.',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		description: 'Max number of results to return',
 		displayOptions: { show: { operation: ['searchPages', 'searchPeople', 'searchPosts'] } },
 	},
 	{
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
-		default: 7,
-		description: 'Max number of results to return. Video search returns 7 items per API call by default.',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		description: 'Max number of results to return',
 		displayOptions: { show: { operation: ['searchVideos'] } },
 	},
-	// --- Additional Fields for Pages & People ---
 	{
 		displayName: 'Additional Fields',
 		name: 'additionalFields',
@@ -130,11 +135,10 @@ export const facebookSearchOperations: INodeProperties[] = [
 		displayOptions: { show: { operation: ['searchPages', 'searchPeople'] } },
 		default: {},
 		options: [
-			{ displayName: 'Location UID', name: 'location_uid', type: 'string', default: '', description: 'Location UID for filtering. Obtain from the Search Locations operation.' },
 			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Pagination cursor to retrieve the next page of results' },
+			{ displayName: 'Location UID', name: 'location_uid', type: 'string', default: '', description: 'Location UID for filtering. Obtain from the Search Locations operation.' },
 		],
 	},
-	// --- Additional Fields for Posts ---
 	{
 		displayName: 'Additional Fields',
 		name: 'additionalFields',
@@ -143,14 +147,13 @@ export const facebookSearchOperations: INodeProperties[] = [
 		displayOptions: { show: { operation: ['searchPosts'] } },
 		default: {},
 		options: [
-			{ displayName: 'Location UID', name: 'location_uid', type: 'string', default: '', description: 'Location UID for filtering. Obtain from the Search Locations operation.' },
-			{ displayName: 'Start Time', name: 'start_time', type: 'string', default: '', description: 'Filter posts after this date (YYYY-MM-DD)' },
-			{ displayName: 'End Time', name: 'end_time', type: 'string', default: '', description: 'Filter posts before this date (YYYY-MM-DD)' },
-			{ displayName: 'Recent Posts', name: 'recent_posts', type: 'boolean', default: false, description: 'Whether to show only recent posts' },
 			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Pagination cursor to retrieve the next page of results' },
+			{ displayName: 'End Time', name: 'end_time', type: 'string', default: '', description: 'Filter posts before this date (YYYY-MM-DD)' },
+			{ displayName: 'Location UID', name: 'location_uid', type: 'string', default: '', description: 'Location UID for filtering. Obtain from the Search Locations operation.' },
+			{ displayName: 'Recent Posts', name: 'recent_posts', type: 'boolean', default: false, description: 'Whether to show only recent posts' },
+			{ displayName: 'Start Time', name: 'start_time', type: 'string', default: '', description: 'Filter posts after this date (YYYY-MM-DD)' },
 		],
 	},
-	// --- Additional Fields for Videos ---
 	{
 		displayName: 'Additional Fields',
 		name: 'additionalFields',
@@ -159,9 +162,9 @@ export const facebookSearchOperations: INodeProperties[] = [
 		displayOptions: { show: { operation: ['searchVideos'] } },
 		default: {},
 		options: [
-			{ displayName: 'Most Recent', name: 'most_recent', type: 'boolean', default: false, description: 'Whether to show most recent videos first' },
-			{ displayName: 'Live Videos Only', name: 'videos_live', type: 'boolean', default: false, description: 'Whether to filter for live videos only' },
 			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Pagination cursor to retrieve the next page of results' },
+			{ displayName: 'Live Videos Only', name: 'videos_live', type: 'boolean', default: false, description: 'Whether to filter for live videos only' },
+			{ displayName: 'Most Recent', name: 'most_recent', type: 'boolean', default: false, description: 'Whether to show most recent videos first' },
 		],
 	},
 ];

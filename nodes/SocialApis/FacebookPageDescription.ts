@@ -77,8 +77,11 @@ export const facebookPageOperations: INodeProperties[] = [
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
-		default: 3,
-		description: 'Max number of results to return. Posts and reels return 3 items per API call by default.',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		description: 'Max number of results to return',
 		displayOptions: { show: { operation: ['getPagePosts', 'getPageReels'] } },
 	},
 	{
