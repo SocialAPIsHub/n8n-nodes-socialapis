@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-socialapis",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "SocialAPIs Node for n8n. Access public data from major social platforms.",
 	"keywords": [
 		"n8n-community-node-package",
