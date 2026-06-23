@@ -19,10 +19,6 @@ export const metaAdsOperations: INodeProperties[] = [
 						url: '/facebook/ads/archive-details',
 						qs: {
 							ad_archive_id: '={{$parameter.adArchiveId}}',
-							page_id: '={{$parameter.additionalFields.page_id}}',
-							country: '={{$parameter.additionalFields.country}}',
-							is_ad_non_political: '={{$parameter.additionalFields.is_ad_non_political}}',
-							is_ad_not_aaa_eligible: '={{$parameter.additionalFields.is_ad_not_aaa_eligible}}',
 						},
 					},
 				},
@@ -54,16 +50,6 @@ export const metaAdsOperations: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '/facebook/ads/search',
-						qs: {
-							query: '={{$parameter.additionalFields.query}}',
-							ad_page_id: '={{$parameter.additionalFields.ad_page_id}}',
-							country: '={{$parameter.additionalFields.country}}',
-							activeStatus: '={{$parameter.additionalFields.activeStatus}}',
-							after_time: '={{$parameter.additionalFields.after_time}}',
-							before_time: '={{$parameter.additionalFields.before_time}}',
-							sort_data: '={{$parameter.additionalFields.sort_data}}',
-							end_cursor: '={{$parameter.additionalFields.end_cursor}}',
-						},
 					},
 				},
 			},
@@ -78,7 +64,6 @@ export const metaAdsOperations: INodeProperties[] = [
 						url: '/facebook/ads/keywords',
 						qs: {
 							query: '={{$parameter.adsQuery}}',
-							country: '={{$parameter.additionalFields.country}}',
 						},
 					},
 				},
@@ -131,14 +116,14 @@ export const metaAdsOperations: INodeProperties[] = [
 		displayOptions: { show: { operation: ['searchAds'] } },
 		default: {},
 		options: [
-			{ displayName: 'Active Status', name: 'activeStatus', type: 'options', options: [{ name: 'All', value: 'ALL' }, { name: 'Active', value: 'Active' }, { name: 'Inactive', value: 'Inactive' }], default: 'ALL' },
-			{ displayName: 'Ad Page ID', name: 'ad_page_id', type: 'string', default: '', description: 'Facebook AD Page ID. Used only if query is not provided.' },
-			{ displayName: 'After Time', name: 'after_time', type: 'string', default: '', description: 'Filter ads after this date (YYYY-MM-DD)' },
-			{ displayName: 'Before Time', name: 'before_time', type: 'string', default: '', description: 'Filter ads before this date (YYYY-MM-DD)' },
-			{ displayName: 'Country', name: 'country', type: 'string', default: 'ALL', description: 'ISO country code or ALL' },
-			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Pagination cursor' },
-			{ displayName: 'Query', name: 'query', type: 'string', default: '', description: 'Search keyword for ads' },
-			{ displayName: 'Sort Data', name: 'sort_data', type: 'options', options: [{ name: 'Impressions (High to Low)', value: 'impressions' }, { name: 'Most Recent', value: 'recent' }], default: 'recent' },
+			{ displayName: 'Active Status', name: 'activeStatus', type: 'options', options: [{ name: 'All', value: 'ALL' }, { name: 'Active', value: 'Active' }, { name: 'Inactive', value: 'Inactive' }], default: 'ALL', routing: { send: { type: 'query', property: 'activeStatus' } } },
+			{ displayName: 'Ad Page ID', name: 'ad_page_id', type: 'string', default: '', description: 'Facebook AD Page ID. Used only if query is not provided.', routing: { send: { type: 'query', property: 'ad_page_id' } } },
+			{ displayName: 'After Time', name: 'after_time', type: 'string', default: '', description: 'Filter ads after this date (YYYY-MM-DD)', routing: { send: { type: 'query', property: 'after_time' } } },
+			{ displayName: 'Before Time', name: 'before_time', type: 'string', default: '', description: 'Filter ads before this date (YYYY-MM-DD)', routing: { send: { type: 'query', property: 'before_time' } } },
+			{ displayName: 'Country', name: 'country', type: 'string', default: 'ALL', description: 'ISO country code or ALL', routing: { send: { type: 'query', property: 'country' } } },
+			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Pagination cursor', routing: { send: { type: 'query', property: 'end_cursor' } } },
+			{ displayName: 'Query', name: 'query', type: 'string', default: '', description: 'Search keyword for ads', routing: { send: { type: 'query', property: 'query' } } },
+			{ displayName: 'Sort Data', name: 'sort_data', type: 'options', options: [{ name: 'Impressions (High to Low)', value: 'impressions' }, { name: 'Most Recent', value: 'recent' }], default: 'recent', routing: { send: { type: 'query', property: 'sort_data' } } },
 		],
 	},
 	{
@@ -149,10 +134,10 @@ export const metaAdsOperations: INodeProperties[] = [
 		displayOptions: { show: { operation: ['getAdDetails'] } },
 		default: {},
 		options: [
-			{ displayName: 'Country', name: 'country', type: 'string', default: 'ALL', description: 'ISO country code or ALL' },
-			{ displayName: 'Non-Political Ad', name: 'is_ad_non_political', type: 'boolean', default: false, description: 'Whether to filter non-political ads' },
-			{ displayName: 'Not AAA Eligible', name: 'is_ad_not_aaa_eligible', type: 'boolean', default: false, description: 'Whether to filter AAA eligibility' },
-			{ displayName: 'Page ID', name: 'page_id', type: 'string', default: '', description: 'Facebook Page ID' },
+			{ displayName: 'Country', name: 'country', type: 'string', default: 'ALL', description: 'ISO country code or ALL', routing: { send: { type: 'query', property: 'country' } } },
+			{ displayName: 'Non-Political Ad', name: 'is_ad_non_political', type: 'boolean', default: false, description: 'Whether to filter non-political ads', routing: { send: { type: 'query', property: 'is_ad_non_political' } } },
+			{ displayName: 'Not AAA Eligible', name: 'is_ad_not_aaa_eligible', type: 'boolean', default: false, description: 'Whether to filter AAA eligibility', routing: { send: { type: 'query', property: 'is_ad_not_aaa_eligible' } } },
+			{ displayName: 'Page ID', name: 'page_id', type: 'string', default: '', description: 'Facebook Page ID', routing: { send: { type: 'query', property: 'page_id' } } },
 		],
 	},
 	{
@@ -163,7 +148,7 @@ export const metaAdsOperations: INodeProperties[] = [
 		displayOptions: { show: { operation: ['searchAdsByKeyword'] } },
 		default: {},
 		options: [
-			{ displayName: 'Country', name: 'country', type: 'string', default: 'ALL', description: 'ISO country code or ALL' },
+			{ displayName: 'Country', name: 'country', type: 'string', default: 'ALL', description: 'ISO country code or ALL', routing: { send: { type: 'query', property: 'country' } } },
 		],
 	},
 ];

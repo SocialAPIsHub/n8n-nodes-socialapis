@@ -37,10 +37,6 @@ export const facebookGroupOperations: INodeProperties[] = [
 						url: '/facebook/groups/posts',
 						qs: {
 							link: '={{$parameter.link}}',
-							end_cursor: '={{$parameter.additionalFields.end_cursor}}',
-							after_time: '={{$parameter.additionalFields.after_time}}',
-							before_time: '={{$parameter.additionalFields.before_time}}',
-							timezone: '={{$parameter.additionalFields.timezone}}',
 						},
 					},
 				},
@@ -76,10 +72,10 @@ export const facebookGroupOperations: INodeProperties[] = [
 		displayOptions: { show: { operation: ['getGroupPosts'] } },
 		default: {},
 		options: [
-			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Cursor for pagination to retrieve the next set of posts' },
-			{ displayName: 'After Time', name: 'after_time', type: 'string', default: '', description: 'Return posts published after this timestamp (ISO 8601 or Unix)' },
-			{ displayName: 'Before Time', name: 'before_time', type: 'string', default: '', description: 'Return posts published before this timestamp (ISO 8601 or Unix)' },
-			{ displayName: 'Timezone', name: 'timezone', type: 'string', default: 'UTC', description: 'Timezone for returned timestamps, e.g. UTC' },
+			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Cursor for pagination to retrieve the next set of posts', routing: { send: { type: 'query', property: 'end_cursor' } } },
+			{ displayName: 'After Time', name: 'after_time', type: 'string', default: '', description: 'Return posts published after this timestamp (ISO 8601 or Unix)', routing: { send: { type: 'query', property: 'after_time' } } },
+			{ displayName: 'Before Time', name: 'before_time', type: 'string', default: '', description: 'Return posts published before this timestamp (ISO 8601 or Unix)', routing: { send: { type: 'query', property: 'before_time' } } },
+			{ displayName: 'Timezone', name: 'timezone', type: 'string', default: 'UTC', description: 'Timezone for returned timestamps, e.g. UTC', routing: { send: { type: 'query', property: 'timezone' } } },
 		],
 	},
 ];

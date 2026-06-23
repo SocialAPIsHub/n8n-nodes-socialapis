@@ -37,10 +37,6 @@ export const facebookPageOperations: INodeProperties[] = [
 						url: '/facebook/pages/posts',
 						qs: {
 							link: '={{$parameter.link}}',
-							end_cursor: '={{$parameter.additionalFields.end_cursor}}',
-							after_time: '={{$parameter.additionalFields.after_time}}',
-							before_time: '={{$parameter.additionalFields.before_time}}',
-							timezone: '={{$parameter.additionalFields.timezone}}',
 						},
 					},
 				},
@@ -56,7 +52,6 @@ export const facebookPageOperations: INodeProperties[] = [
 						url: '/facebook/pages/reels',
 						qs: {
 							link: '={{$parameter.link}}',
-							end_cursor: '={{$parameter.additionalFields.end_cursor}}',
 						},
 					},
 				},
@@ -92,10 +87,10 @@ export const facebookPageOperations: INodeProperties[] = [
 		displayOptions: { show: { operation: ['getPagePosts'] } },
 		default: {},
 		options: [
-			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Cursor for pagination to retrieve the next set of posts' },
-			{ displayName: 'After Time', name: 'after_time', type: 'string', default: '', description: 'Only include posts published after this timestamp (ISO 8601 format)' },
-			{ displayName: 'Before Time', name: 'before_time', type: 'string', default: '', description: 'Only include posts published before this timestamp (ISO 8601 format)' },
-			{ displayName: 'Timezone', name: 'timezone', type: 'string', default: 'UTC', description: 'Timezone used for formatting post timestamps (e.g. UTC, America/New_York)' },
+			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Cursor for pagination to retrieve the next set of posts', routing: { send: { type: 'query', property: 'end_cursor' } } },
+			{ displayName: 'After Time', name: 'after_time', type: 'string', default: '', description: 'Only include posts published after this timestamp (ISO 8601 format)', routing: { send: { type: 'query', property: 'after_time' } } },
+			{ displayName: 'Before Time', name: 'before_time', type: 'string', default: '', description: 'Only include posts published before this timestamp (ISO 8601 format)', routing: { send: { type: 'query', property: 'before_time' } } },
+			{ displayName: 'Timezone', name: 'timezone', type: 'string', default: 'UTC', description: 'Timezone used for formatting post timestamps (e.g. UTC, America/New_York)', routing: { send: { type: 'query', property: 'timezone' } } },
 		],
 	},
 	{
@@ -106,7 +101,7 @@ export const facebookPageOperations: INodeProperties[] = [
 		displayOptions: { show: { operation: ['getPageReels'] } },
 		default: {},
 		options: [
-			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Cursor for pagination to retrieve the next set of reels' },
+			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Cursor for pagination to retrieve the next set of reels', routing: { send: { type: 'query', property: 'end_cursor' } } },
 		],
 	},
 ];

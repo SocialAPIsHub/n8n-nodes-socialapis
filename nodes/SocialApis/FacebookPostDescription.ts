@@ -44,8 +44,6 @@ export const facebookPostOperations: INodeProperties[] = [
 						url: '/facebook/posts/comments',
 						qs: {
 							link: '={{$parameter.postLink}}',
-							end_cursor: '={{$parameter.additionalFields.end_cursor}}',
-							include_reply_info: '={{$parameter.additionalFields.include_reply_info}}',
 						},
 					},
 				},
@@ -145,8 +143,8 @@ export const facebookPostOperations: INodeProperties[] = [
 		displayOptions: { show: { operation: ['getPostComments'] } },
 		default: {},
 		options: [
-			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Pagination cursor to retrieve the next page of comments' },
-			{ displayName: 'Include Reply Info', name: 'include_reply_info', type: 'boolean', default: false, description: 'Whether to include comment_feedback_id and expansion_token for fetching replies' },
+			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Pagination cursor to retrieve the next page of comments', routing: { send: { type: 'query', property: 'end_cursor' } } },
+			{ displayName: 'Include Reply Info', name: 'include_reply_info', type: 'boolean', default: false, description: 'Whether to include comment_feedback_id and expansion_token for fetching replies', routing: { send: { type: 'query', property: 'include_reply_info' } } },
 		],
 	},
 ];

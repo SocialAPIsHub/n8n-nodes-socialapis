@@ -32,8 +32,6 @@ export const facebookSearchOperations: INodeProperties[] = [
 						url: '/facebook/search/pages',
 						qs: {
 							query: '={{$parameter.query}}',
-							location_uid: '={{$parameter.additionalFields.location_uid}}',
-							end_cursor: '={{$parameter.additionalFields.end_cursor}}',
 						},
 					},
 				},
@@ -49,8 +47,6 @@ export const facebookSearchOperations: INodeProperties[] = [
 						url: '/facebook/search/people',
 						qs: {
 							query: '={{$parameter.query}}',
-							location_uid: '={{$parameter.additionalFields.location_uid}}',
-							end_cursor: '={{$parameter.additionalFields.end_cursor}}',
 						},
 					},
 				},
@@ -66,11 +62,6 @@ export const facebookSearchOperations: INodeProperties[] = [
 						url: '/facebook/search/posts',
 						qs: {
 							query: '={{$parameter.query}}',
-							location_uid: '={{$parameter.additionalFields.location_uid}}',
-							start_time: '={{$parameter.additionalFields.start_time}}',
-							end_time: '={{$parameter.additionalFields.end_time}}',
-							recent_posts: '={{$parameter.additionalFields.recent_posts}}',
-							end_cursor: '={{$parameter.additionalFields.end_cursor}}',
 						},
 					},
 				},
@@ -86,9 +77,6 @@ export const facebookSearchOperations: INodeProperties[] = [
 						url: '/facebook/search/videos',
 						qs: {
 							query: '={{$parameter.query}}',
-							most_recent: '={{$parameter.additionalFields.most_recent}}',
-							videos_live: '={{$parameter.additionalFields.videos_live}}',
-							end_cursor: '={{$parameter.additionalFields.end_cursor}}',
 						},
 					},
 				},
@@ -135,8 +123,8 @@ export const facebookSearchOperations: INodeProperties[] = [
 		displayOptions: { show: { operation: ['searchPages', 'searchPeople'] } },
 		default: {},
 		options: [
-			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Pagination cursor to retrieve the next page of results' },
-			{ displayName: 'Location UID', name: 'location_uid', type: 'string', default: '', description: 'Location UID for filtering. Obtain from the Search Locations operation.' },
+			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Pagination cursor to retrieve the next page of results', routing: { send: { type: 'query', property: 'end_cursor' } } },
+			{ displayName: 'Location UID', name: 'location_uid', type: 'string', default: '', description: 'Location UID for filtering. Obtain from the Search Locations operation.', routing: { send: { type: 'query', property: 'location_uid' } } },
 		],
 	},
 	{
@@ -147,11 +135,11 @@ export const facebookSearchOperations: INodeProperties[] = [
 		displayOptions: { show: { operation: ['searchPosts'] } },
 		default: {},
 		options: [
-			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Pagination cursor to retrieve the next page of results' },
-			{ displayName: 'End Time', name: 'end_time', type: 'string', default: '', description: 'Filter posts before this date (YYYY-MM-DD)' },
-			{ displayName: 'Location UID', name: 'location_uid', type: 'string', default: '', description: 'Location UID for filtering. Obtain from the Search Locations operation.' },
-			{ displayName: 'Recent Posts', name: 'recent_posts', type: 'boolean', default: false, description: 'Whether to show only recent posts' },
-			{ displayName: 'Start Time', name: 'start_time', type: 'string', default: '', description: 'Filter posts after this date (YYYY-MM-DD)' },
+			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Pagination cursor to retrieve the next page of results', routing: { send: { type: 'query', property: 'end_cursor' } } },
+			{ displayName: 'End Time', name: 'end_time', type: 'string', default: '', description: 'Filter posts before this date (YYYY-MM-DD)', routing: { send: { type: 'query', property: 'end_time' } } },
+			{ displayName: 'Location UID', name: 'location_uid', type: 'string', default: '', description: 'Location UID for filtering. Obtain from the Search Locations operation.', routing: { send: { type: 'query', property: 'location_uid' } } },
+			{ displayName: 'Recent Posts', name: 'recent_posts', type: 'boolean', default: false, description: 'Whether to show only recent posts', routing: { send: { type: 'query', property: 'recent_posts' } } },
+			{ displayName: 'Start Time', name: 'start_time', type: 'string', default: '', description: 'Filter posts after this date (YYYY-MM-DD)', routing: { send: { type: 'query', property: 'start_time' } } },
 		],
 	},
 	{
@@ -162,9 +150,9 @@ export const facebookSearchOperations: INodeProperties[] = [
 		displayOptions: { show: { operation: ['searchVideos'] } },
 		default: {},
 		options: [
-			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Pagination cursor to retrieve the next page of results' },
-			{ displayName: 'Live Videos Only', name: 'videos_live', type: 'boolean', default: false, description: 'Whether to filter for live videos only' },
-			{ displayName: 'Most Recent', name: 'most_recent', type: 'boolean', default: false, description: 'Whether to show most recent videos first' },
+			{ displayName: 'End Cursor', name: 'end_cursor', type: 'string', default: '', description: 'Pagination cursor to retrieve the next page of results', routing: { send: { type: 'query', property: 'end_cursor' } } },
+			{ displayName: 'Live Videos Only', name: 'videos_live', type: 'boolean', default: false, description: 'Whether to filter for live videos only', routing: { send: { type: 'query', property: 'videos_live' } } },
+			{ displayName: 'Most Recent', name: 'most_recent', type: 'boolean', default: false, description: 'Whether to show most recent videos first', routing: { send: { type: 'query', property: 'most_recent' } } },
 		],
 	},
 ];
