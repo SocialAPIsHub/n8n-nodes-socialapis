@@ -2,7 +2,7 @@
 	"node": "n8n-nodes-socialapis.socialApis",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
-	"categories": ["Marketing", "Data & Storage", "Development"],
+	"categories": ["Marketing & Content", "Analytics", "Data & Storage"],
 	"resources": {
 		"credentialDocumentation": [
 			{

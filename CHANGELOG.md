@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.1] — 2026-10-06
+
+### Fixed
+
+- Node categories now use n8n's community category list (`Marketing & Content`, `Analytics`, `Data & Storage`). `Marketing` isn't a valid category and failed n8n's verification scan.
+
 ## [0.2.0] — 2026-10-06
 
 ### Added

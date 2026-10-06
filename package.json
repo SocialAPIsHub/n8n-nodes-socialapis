@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-socialapis",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "n8n community node for SocialAPIs: public Facebook and Instagram data (pages, posts, groups, Ads Library, Marketplace, profiles, reels). No OAuth.",
 	"keywords": [
 		"n8n-community-node-package",
