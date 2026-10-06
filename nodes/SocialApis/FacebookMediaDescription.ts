@@ -14,7 +14,11 @@ export const facebookMediaOperations: INodeProperties[] = [
 				action: 'Download facebook media',
 				description: 'Download media (images, videos, audio) from Facebook URLs',
 				routing: {
-					request: { method: 'GET', url: '/facebook/media/download', qs: { url: '={{$parameter.url}}' } },
+					request: {
+						method: 'GET',
+						url: '/facebook/media/download',
+						qs: { url: '={{$parameter.url}}' },
+					},
 				},
 			},
 		],

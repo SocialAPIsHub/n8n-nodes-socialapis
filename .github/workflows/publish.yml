@@ -1,22 +1,47 @@
-name: Publish to npm
+# Publishes to npm with a provenance statement when a version tag is pushed.
+# n8n requires GitHub Actions + provenance for verified community nodes
+# (from May 1 2026).
+#
+# npm auth is Trusted Publishing (OIDC): npmjs.com → n8n-nodes-socialapis →
+# Settings → Trusted Publisher → GitHub Actions, repository
+# SocialAPIsHub/n8n-nodes-socialapis, workflow publish.yml. No NPM_TOKEN.
+#
+# Release: bump "version" in package.json + CHANGELOG.md in a PR, merge, then
+#   git tag v0.2.0 && git push origin v0.2.0
+
+name: Publish
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - '*.*.*'
 
 jobs:
   publish:
+    name: Publish to npm
     runs-on: ubuntu-latest
     permissions:
-      contents: read
       id-token: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install -g npm@latest
-      - run: npm install --ignore-scripts
-      - run: npm run build
-      - run: npm publish --provenance --access public
+          cache: 'npm'
+
+      - name: Verify version matches tag
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          pkg_version=$(node -p "require('./package.json').version")
+          if [ "$tag" != "$pkg_version" ]; then
+            echo "::error::Tag ${tag} does not match package.json version ${pkg_version}"
+            exit 1
+          fi
+
+      - run: npm ci
+
+      # In CI, `n8n-node release` runs lint + build, then npm publish with provenance.
+      - run: npm run release

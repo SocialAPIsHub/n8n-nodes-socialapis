@@ -2,7 +2,9 @@
 
 ![n8n.io - Workflow Automation](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png)
 
-This is an n8n community node. It lets you access public social media data with [SocialAPIs](https://socialapis.io/)
+This is an n8n community node. It gets public **Facebook and Instagram** data from [SocialAPIs](https://socialapis.io/): pages, posts, comments, groups, the Meta Ads Library, Marketplace, Instagram profiles, posts, reels and locations. No Meta developer app or OAuth needed. It covers all 50 SocialAPIs endpoints.
+
+The node can also be used as a tool by n8n AI Agents.
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
@@ -20,26 +22,37 @@ For n8n version 0.187 and later, you can install this node through the Community
 
 ## Credentials
 
-To use this node, you will need to authenticate with the SocialAPIs API.
+You need a SocialAPIs API token. The free plan includes 200 credits a month, no card needed.
 
-1. Sign up for a [SocialAPIs account](https://socialapis.io/)
-2. Copy API Token
-3. Create new credential in n8n
-   - Use the SocialAPIs node
-   - Under Credential to connect with, click Create New Credential
-   - Paste API Token
+1. Sign up at [socialapis.io](https://socialapis.io/) and copy your token from the [dashboard](https://socialapis.io/dashboard).
+2. In n8n, add a **SocialAPIs** node, then under **Credential to connect with** select **Create New Credential**.
+3. Paste the token into **API Token** and save. n8n tests it against the `/usage` endpoint, which costs no credits.
+
+The token is sent in the `x-api-token` header.
 
 ## Supported resources and operations
 
 | Resource | Operations |
 | --- | --- |
-| **Facebook Page** | Get Page ID, Get Page Details, Get Page Posts, Get Page Reels |
-| **Facebook Post** | Get Post Details, Get Post Comments, Get Post Reactions |
-| **Facebook Group** | Get Group Details, Get Group Posts |
-| **Facebook Media** | Get Media Details |
-| **Facebook Search** | Search Pages, Search People, Search Posts, Search Videos, Search Locations |
-| **Meta Ads Library** | Search Ads, Search by Keyword, Get Ad Details, Get Page Ad Details, Get Supported Countries |
-| **Facebook Marketplace** | Browse listings, item details, categories, locations |
+| **Facebook Page** | Get Page Details, Get Page ID, Get Page Posts, Get Page Reels, Get Page Videos |
+| **Facebook Group** | Get Group Details, Get Group ID, Get Group Posts, Get Group Videos |
+| **Facebook Post** | Get Comment Replies, Get Post Attachments, Get Post Comments, Get Post Details, Get Post Details (Extended), Get Post ID, Get Video Details |
+| **Facebook Search** | Search Locations, Search Pages, Search People, Search Posts, Search Videos |
+| **Meta Ads Library** | Get Ad Details, Get Page Ad Details, Get Supported Countries, Search Ads, Search by Keyword |
+| **Facebook Marketplace** | Find City Coordinates, Get Categories, Get Listing Details, Get Seller Details, Search Listings, Search Rentals, Search Vehicles |
+| **Facebook Media** | Download Media |
+| **Instagram Profile** | Get Highlight Details, Get Profile Details, Get Profile Highlights, Get Profile Posts, Get Profile Reels, Get User ID |
+| **Instagram Post** | Get Post Details, Get Post Shortcode |
+| **Instagram Reel** | Get Reels by Audio, Get Reels Feed |
+| **Instagram Search** | Search |
+| **Instagram Location** | Get Location Posts, Get Nearby Locations |
+| **Account** | Get Usage, Get Limits, Get Top-Ups (free, no credits) |
+
+Most operations cost 1 credit per call. See [socialapis.io/pricing](https://socialapis.io/pricing).
+
+## Compatibility
+
+Tested with n8n 1.x. Requires an n8n version that supports community nodes (0.187 or later).
 
 ## Usage examples
 

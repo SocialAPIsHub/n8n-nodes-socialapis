@@ -1,12 +1,12 @@
 {
-	"node": "n8n-nodes-base.SocialApis",
+	"node": "n8n-nodes-socialapis.socialApis",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
-	"categories": ["Miscellaneous", "Development", "Productivity"],
+	"categories": ["Marketing", "Data & Storage", "Development"],
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.socialapis.io/"
+				"url": "https://github.com/SocialAPIsHub/n8n-nodes-socialapis#credentials"
 			}
 		],
 		"primaryDocumentation": [
