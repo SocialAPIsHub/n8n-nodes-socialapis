@@ -1,5 +1,6 @@
 import { NodeConnectionTypes, type INodeType, type INodeTypeDescription } from 'n8n-workflow';
 import { accountOperations } from './AccountDescription';
+import { facebookAlbumOperations } from './FacebookAlbumDescription';
 import { facebookPageOperations } from './FacebookPageDescription';
 import { facebookGroupOperations } from './FacebookGroupDescription';
 import { facebookPostOperations } from './FacebookPostDescription';
@@ -55,6 +56,7 @@ export class SocialApis implements INodeType {
 				noDataExpression: true,
 				options: [
 					{ name: 'Account', value: 'account' },
+					{ name: 'Facebook Album', value: 'facebookAlbum' },
 					{ name: 'Facebook Group', value: 'facebookGroup' },
 					{ name: 'Facebook Marketplace', value: 'marketplace' },
 					{ name: 'Facebook Media', value: 'facebookMedia' },
@@ -73,6 +75,7 @@ export class SocialApis implements INodeType {
 			...accountOperations,
 			...facebookPageOperations,
 			...facebookGroupOperations,
+			...facebookAlbumOperations,
 			...facebookPostOperations,
 			...facebookSearchOperations,
 			...metaAdsOperations,

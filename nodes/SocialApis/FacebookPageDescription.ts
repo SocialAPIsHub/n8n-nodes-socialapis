@@ -9,6 +9,19 @@ export const facebookPageOperations: INodeProperties[] = [
 		displayOptions: { show: { resource: ['facebookPage'] } },
 		options: [
 			{
+				name: 'Get Page Albums',
+				value: 'getPageAlbums',
+				action: 'Get facebook page albums',
+				description: 'List the photo albums of a Page. Needs the numeric page ID from Get Page ID.',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/facebook/pages/albums',
+						qs: { profile_id: '={{$parameter.pageId}}' },
+					},
+				},
+			},
+			{
 				name: 'Get Page Details',
 				value: 'getPageDetails',
 				action: 'Get facebook page details',
@@ -179,6 +192,43 @@ export const facebookPageOperations: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Cursor for pagination to retrieve the next set of videos',
+				routing: { send: { type: 'query', property: 'end_cursor' } },
+			},
+		],
+	},
+	{
+		displayName: 'Page ID',
+		name: 'pageId',
+		type: 'string',
+		required: true,
+		default: '',
+		description: 'Numeric Facebook page ID, from Get Page ID',
+		displayOptions: { show: { operation: ['getPageAlbums'] } },
+	},
+	{
+		displayName: 'Albums Per Call',
+		name: 'pageAlbumsPerCall',
+		type: 'number',
+		typeOptions: { minValue: 8, maxValue: 16 },
+		default: 8,
+		description: 'How many albums to return in one call (8-16)',
+		displayOptions: { show: { operation: ['getPageAlbums'] } },
+		routing: { send: { type: 'query', property: 'limit' } },
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		displayOptions: { show: { operation: ['getPageAlbums'] } },
+		default: {},
+		options: [
+			{
+				displayName: 'End Cursor',
+				name: 'end_cursor',
+				type: 'string',
+				default: '',
+				description: 'Cursor for pagination to retrieve the next set of albums',
 				routing: { send: { type: 'query', property: 'end_cursor' } },
 			},
 		],
