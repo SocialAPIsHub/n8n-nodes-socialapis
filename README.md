@@ -2,7 +2,7 @@
 
 ![n8n.io - Workflow Automation](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png)
 
-This is an n8n community node. It gets public **Facebook and Instagram** data from [SocialAPIs](https://socialapis.io/): pages, posts, comments, groups, the Meta Ads Library, Marketplace, Instagram profiles, posts, reels and locations. No Meta developer app or OAuth needed. It covers all 50 SocialAPIs endpoints.
+This is an n8n community node. It gets public **Facebook and Instagram** data from [SocialAPIs](https://socialapis.io/): pages, posts, comments, groups, the Meta Ads Library, Marketplace, Instagram profiles, posts, reels and locations. No Meta developer app or OAuth needed. It covers all 53 SocialAPIs endpoints.
 
 The node can also be used as a tool by n8n AI Agents.
 
@@ -34,8 +34,9 @@ The token is sent in the `x-api-token` header.
 
 | Resource | Operations |
 | --- | --- |
-| **Facebook Page** | Get Page Details, Get Page ID, Get Page Posts, Get Page Reels, Get Page Videos |
-| **Facebook Group** | Get Group Details, Get Group ID, Get Group Posts, Get Group Videos |
+| **Facebook Page** | Get Page Albums, Get Page Details, Get Page ID, Get Page Posts, Get Page Reels, Get Page Videos |
+| **Facebook Group** | Get Group Albums, Get Group Details, Get Group ID, Get Group Posts, Get Group Videos |
+| **Facebook Album** | Get Album Items |
 | **Facebook Post** | Get Comment Replies, Get Post Attachments, Get Post Comments, Get Post Details, Get Post Details (Extended), Get Post ID, Get Video Details |
 | **Facebook Search** | Search Locations, Search Pages, Search People, Search Posts, Search Videos |
 | **Meta Ads Library** | Get Ad Details, Get Page Ad Details, Get Supported Countries, Search Ads, Search by Keyword |

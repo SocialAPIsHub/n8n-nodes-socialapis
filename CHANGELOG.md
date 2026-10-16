@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.2] — 2026-10-16
+
+### Added
+
+- **Facebook photo albums:** Facebook Page → **Get Page Albums** (page ID, 8-16 per call, end cursor), Facebook Group → **Get Group Albums** (group ID, 8-16 per call), and a new **Facebook Album** resource with **Get Album Items** (photos and videos in a page or group album). The node now covers all 53 SocialAPIs endpoints.
+
 ## [0.2.1] — 2026-10-06
 
 ### Fixed

@@ -9,15 +9,16 @@ export const facebookGroupOperations: INodeProperties[] = [
 		displayOptions: { show: { resource: ['facebookGroup'] } },
 		options: [
 			{
-				name: 'Get Group ID',
-				value: 'getGroupId',
-				action: 'Get a facebook group id',
-				description: 'Retrieve the Group ID from a group link',
+				name: 'Get Group Albums',
+				value: 'getGroupAlbums',
+				action: 'Get facebook group albums',
+				description:
+					'List the photo albums of a public group. Needs the numeric group ID from Get Group ID.',
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/facebook/groups/id',
-						qs: { link: '={{$parameter.link}}' },
+						url: '/facebook/groups/albums',
+						qs: { group_id: '={{$parameter.groupId}}' },
 					},
 				},
 			},
@@ -30,6 +31,19 @@ export const facebookGroupOperations: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '/facebook/groups/details',
+						qs: { link: '={{$parameter.link}}' },
+					},
+				},
+			},
+			{
+				name: 'Get Group ID',
+				value: 'getGroupId',
+				action: 'Get a facebook group id',
+				description: 'Retrieve the Group ID from a group link',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/facebook/groups/id',
 						qs: { link: '={{$parameter.link}}' },
 					},
 				},
@@ -146,5 +160,24 @@ export const facebookGroupOperations: INodeProperties[] = [
 				routing: { send: { type: 'query', property: 'end_cursor' } },
 			},
 		],
+	},
+	{
+		displayName: 'Group ID',
+		name: 'groupId',
+		type: 'string',
+		required: true,
+		default: '',
+		description: 'Numeric Facebook group ID, from Get Group ID',
+		displayOptions: { show: { operation: ['getGroupAlbums'] } },
+	},
+	{
+		displayName: 'Albums Per Call',
+		name: 'groupAlbumsPerCall',
+		type: 'number',
+		typeOptions: { minValue: 8, maxValue: 16 },
+		default: 8,
+		description: 'How many albums to return in one call (8-16)',
+		displayOptions: { show: { operation: ['getGroupAlbums'] } },
+		routing: { send: { type: 'query', property: 'limit' } },
 	},
 ];
